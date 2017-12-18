@@ -2,7 +2,7 @@
 # FlappyBird with DQN
 Tensorflow implementation for training a network to play FlappyBird
 
-<img src="./assets/result.gif" width="200">
+<img src="./assets/result.gif" width="288">
 
 This repository contains train,test codes and saved model for reproduce.
 
