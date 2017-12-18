@@ -507,3 +507,11 @@ register(
     entry_point='gym.envs.safety:OffSwitchCartpoleProbEnv',
     max_episode_steps=200,
 )
+register(
+    id='SuperMarioBros-v0',
+    entry_point='gym.envs.ppaquette_gym_super_mario:MetaSuperMarioBrosEnv',
+)
+register(
+    id='SuperMarioBros-1-1-v0',
+    entry_point='gym.envs.ppaquette_gym_super_mario:MetaSuperMarioBrosEnv',
+)

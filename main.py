@@ -10,7 +10,6 @@ import skimage
 import scipy.misc
 
 import traceback
-import signal
 import os
 
 from utils import *
@@ -18,14 +17,6 @@ from buffer import *
 from config import config
 from model import *
 from plot import *
-
-env=None
-
-
-def signal_handler(signal, frame):
-    env.close()
-    exit()
-signal.signal(signal.SIGINT, signal_handler)
 
 def updateTargetGraph(tfVars, tau):
     total_vars = len(tfVars)
@@ -272,9 +263,11 @@ def evaluate():
         video_path = config.TRAIN.path + '/' + tl.global_flag['mode'] + '/video'
 
         env = gym.make('FlappyBird-v0')
-        env = wrappers.Monitor(env, video_path, force=True)
+        rec_video_rule=lambda episode_id: episode_id % 1 == 0
+        env = wrappers.Monitor(env, video_path, force = True, video_callable=rec_video_rule)
         while True:
 
+            print 'reset'
             s, info = env.reset()
 
             s = scipy.misc.imresize(s, [84, 84], interp = 'bicubic', mode=None)
@@ -287,7 +280,7 @@ def evaluate():
             rAll = 0.
 
             while True:
-                env.render()
+                #env.render()
                 a = sess.run(mainQN.predict, feed_dict={mainQN.image: s, mainQN.scalar: info})[0]
                 s1, r, d, info1 = env.step(a)
 
