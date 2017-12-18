@@ -34,8 +34,8 @@ config.TRAIN.lr_decay = 0.5
 config.TRAIN.decay_every = 5000
 config.TRAIN.max_step = 1000
 ## train set location
-config.TRAIN.path = './saves'
-#config.TRAIN.path = '/media/junyonglee/Data/saves'
+#config.TRAIN.path = './saves'
+config.TRAIN.path = '/media/junyonglee/Data/saves'
 
 config.VALID = edict()
 
