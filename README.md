@@ -27,7 +27,7 @@ cd flapybird_DQN
 - Install python-pygame
 ```bash
 sudo apt-get install python-pygame
-'''
+```
 
 ## Training and Test Details
 - you need to specify directories for checkpoint and buffer saving directory in config.py
@@ -40,7 +40,9 @@ python main.py --is_Train True
 python main.py --is_Train False
 ```
 - To render and to show the plot, add
+```bash
 python main.py --is_Train True --render True --plot True
+```
 
 ## License ##
 This software is being made available under the terms in the [LICENSE](LICENSE) file.
