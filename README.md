@@ -14,7 +14,7 @@ Tensorflow implementation of FlappyBird using Reinforcement Learning, DQN
 -   Clone this repo:
 ```bash
 git clone https://github.com/codeslake/flappybird_DQN.git
-cd flapybird_DQN
+cd flappybird_DQN
 ```
 -   Install python-pygame
 ```bash
