@@ -1,4 +1,5 @@
 import gym
+from gym import wrappers
 import gym_ple
 import tensorflow as tf
 import tensorlayer as tl
@@ -18,7 +19,8 @@ from config import config
 from model import *
 from plot import *
 
-env = gym.make('FlappyBird-v0')
+env=None
+
 
 def signal_handler(signal, frame):
     env.close()
@@ -37,6 +39,8 @@ def updateTarget(op_holder,sess):
         sess.run(op)
 
 def train():
+    env = gym.make('FlappyBird-v0')
+
     tf.reset_default_graph()
     mainQN = Qnetwork(config.TRAIN.h_size, 'mainQN', False, lr_init=config.TRAIN.lr_init, beta=config.TRAIN.beta1)
     targetQN = Qnetwork(config.TRAIN.h_size, 'targetQN', False)
@@ -97,22 +101,6 @@ def train():
                 print("\tEpsilon: %.8f" % epsilon)
                 print("\tLearning Rate: %.8f" % lr)
 
-            s, info = env.reset()
-
-            '''
-            s = scipy.misc.imresize(s, [84, 84], interp = 'bicubic', mode=None)
-            s = np.expand_dims(skimage.color.rgb2grey(s), axis=2)
-            for i in range(13):
-                frameBuffer.add(s)
-            s = frameBuffer.sample(4)
-
-            '''
-            s = scipy.misc.imresize(s, [84, 84], interp = 'bicubic', mode=None)
-            s = skimage.color.rgb2grey(s)
-            s = np.stack((s, s, s, s), axis=2)
-            s = np.expand_dims(s, axis=0)
-
-            info = np.stack((info, info, info, info), axis=2)
 
 
             if tl.global_flag['plot']:
@@ -134,6 +122,16 @@ def train():
                 rAll = 0
                 j = 0
                 lossList = []
+
+                s, info = env.reset()
+
+                s = scipy.misc.imresize(s, [84, 84], interp = 'bicubic', mode=None)
+                s = skimage.color.rgb2grey(s)
+                s = np.stack((s, s, s, s), axis=2)
+                s = np.expand_dims(s, axis=0)
+
+                info = np.stack((info, info, info, info), axis=2)
+
                 while j < config.TRAIN.max_step:
                     if tl.global_flag['render'] and num_episode is not 0 and num_episode % 100 == 0:
                         env.render()
@@ -165,19 +163,6 @@ def train():
                         r = 0
                     '''
 
-                    '''
-                    if ai:
-                        print '[' + str(total_steps) + '] action:' + str(a) + ' reward: ' + str(r) + '*'
-                    else:
-                        print '[' + str(total_steps) + '] action:' + str(a) + ' reward: ' + str(r)
-                    '''
-
-                    '''
-                    s1 = scipy.misc.imresize(s1, [84, 84], interp = 'bicubic', mode=None)
-                    s1 = np.expand_dims(skimage.color.rgb2grey(s1), axis=2)
-                    frameBuffer.add(s1)
-                    s1 = frameBuffer.sample(4)
-                    '''
                     s1 = scipy.misc.imresize(s1, [84, 84], interp = 'bicubic', mode=None)
                     s1 = np.expand_dims(np.expand_dims(skimage.color.rgb2grey(s1), axis=2), axis=0)
                     s1 = np.append(s1, s[:, :, :, :3], axis=3)
@@ -192,7 +177,7 @@ def train():
 
                     if config.TRAIN.load_pretrain == False and total_steps == config.TRAIN.pre_train_steps:
                         myBuffer.add(episodeBuffer.buffer)
-                        np.save(buffer_path + '/pretrain_' + str(i) + '.npy', np.array(myBuffer.buffer))
+                        np.save(buffer_path + '/pretrain.npy', np.array(myBuffer.buffer))
 
                     if total_steps > config.TRAIN.pre_train_steps:
                         if e > config.TRAIN.endE:
@@ -224,7 +209,6 @@ def train():
 
                 # reset
                 ########
-                env.reset()
                 total_episode_reward = rAll
                 episode_iterations = j
                 total_iterations = total_steps
@@ -250,8 +234,8 @@ def train():
                     avg_loss = np.mean(lossList)
                     if total_steps > config.TRAIN.pre_train_steps:
                         avglossList.append(avg_loss)
-                    if len(avglossList) > 100:
-                        avglossList= avglossList[-100:]
+                    if len(avglossList) > 50:
+                        avglossList= avglossList[-50:]
                     avg_loss = np.mean(avglossList)
                     graph.write_to_handler(graph.loss_handler, graph.loss_axis, graph.step_handler.get_xdata(), avg_loss)
 
@@ -285,9 +269,11 @@ def evaluate():
         ckpt_path = config.TRAIN.path + '/' + tl.global_flag['mode'] + '/checkpoint'
         load_model(sess, saver, ckpt_path)
 
-        while True:
+        video_path = config.TRAIN.path + '/' + tl.global_flag['mode'] + '/video'
 
-            rAll = 0.
+        env = gym.make('FlappyBird-v0')
+        env = wrappers.Monitor(env, video_path, force=True)
+        while True:
 
             s, info = env.reset()
 
@@ -297,6 +283,8 @@ def evaluate():
             s = np.expand_dims(s, axis=0)
 
             info = np.stack((info, info, info, info), axis=2)
+
+            rAll = 0.
 
             while True:
                 env.render()
@@ -311,12 +299,12 @@ def evaluate():
 
                 rAll += r
 
-                if d:
-                    print 'reward: ' + str(r)
-                    break;
-
                 s = s1
                 info = info1
+
+                if d:
+                    print 'reward: ' + str(rAll)
+                    break;
 
     return
 
@@ -339,6 +327,7 @@ if __name__ == '__main__':
         os.makedirs(config.TRAIN.path + '/' + tl.global_flag['mode'])
         os.makedirs(config.TRAIN.path + '/' + tl.global_flag['mode'] + '/checkpoint')
         os.makedirs(config.TRAIN.path + '/' + tl.global_flag['mode'] + '/buffer')
+        os.makedirs(config.TRAIN.path + '/' + tl.global_flag['mode'] + '/video')
 
     if tl.global_flag['is_train']:
         train()
