@@ -13,29 +13,30 @@ This repository contains train,test codes and saved model for reproduce.
 
 ## Getting Started
 ### Installation
-- Install tensorflow from https://www.tensorflow.org/install/
-- Clone this repo:
+-   Install tensorflow from https://www.tensorflow.org/install/
+-   Clone this repo:
 ```bash
 git clone https://github.com/codeslake/flappybird_DQN.git
 cd flapybird_DQN
 ```
-- Install python-pygame
+-   Install python-pygame
 ```bash
 sudo apt-get install python-pygame
 ```
-* There is no need to install gym and gym-ple. Actually, one needs to use what are uploaded. There are some changes in gym (related to wrapper.monitor) and gym-ple (related retreiving info) 
+-   There is no need to install gym and gym-ple. Actually, one needs to use what are uploaded.
+    There are some changes in gym (related to wrapper.monitor) and gym-ple (related retreiving info) 
 
 ## Training and Test Details
-- you need to specify directories for checkpoint and buffer saving directory in config.py
-- To train a model,  
+-   you need to specify directories for checkpoint and buffer saving directory in config.py
+-   To train a model,  
 ```bash
 python main.py --is_Train True
 ```
-- To test the model,
+-   To test the model,
 ```bash
 python main.py --is_Train False
 ```
-- To render and to show the plots (plot will not work while testing), add 
+-   To render and to show the plots (plot will not work while testing), add 
 ```bash
 python main.py --is_Train True --render True --plot True
 ```
