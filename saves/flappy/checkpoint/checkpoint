@@ -1,0 +1,6 @@
+model_checkpoint_path: "/media/junyonglee/Data/saves/dqn/flappy_added_info_decay_5000_batch_64/checkpoint/model-22000.ckpt"
+all_model_checkpoint_paths: "/media/junyonglee/Data/saves/dqn/flappy_added_info_decay_5000_batch_64/checkpoint/model-18000.ckpt"
+all_model_checkpoint_paths: "/media/junyonglee/Data/saves/dqn/flappy_added_info_decay_5000_batch_64/checkpoint/model-19000.ckpt"
+all_model_checkpoint_paths: "/media/junyonglee/Data/saves/dqn/flappy_added_info_decay_5000_batch_64/checkpoint/model-20000.ckpt"
+all_model_checkpoint_paths: "/media/junyonglee/Data/saves/dqn/flappy_added_info_decay_5000_batch_64/checkpoint/model-21000.ckpt"
+all_model_checkpoint_paths: "/media/junyonglee/Data/saves/dqn/flappy_added_info_decay_5000_batch_64/checkpoint/model-22000.ckpt"

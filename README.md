@@ -2,16 +2,9 @@
 # FlappyBird with DQN
 Tensorflow implementation for training a network to play FlappyBird
 
-![result](/assets/result.jpg)
-
-Network structure for transformation network looks:
-![network](/assets/model.png)
-
-This repository contains train and test codes for reproduce.
-Pretrained network model and dataset will be distributed soon.
+This repository contains train,test codes and saved model for reproduce.
 
 --------------------------
-
 ## Prerequisites
 - Tensorflow
 - python-pygame
