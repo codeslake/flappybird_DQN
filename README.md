@@ -23,6 +23,7 @@ cd flapybird_DQN
 ```bash
 sudo apt-get install python-pygame
 ```
+* There is no need to install gym and gym-ple. Actually, one needs to use what are uploaded. There are some changes in gym (related to wrapper.monitor) and gym-ple (related retreiving info) 
 
 ## Training and Test Details
 - you need to specify directories for checkpoint and buffer saving directory in config.py
@@ -34,7 +35,7 @@ python main.py --is_Train True
 ```bash
 python main.py --is_Train False
 ```
-- To render and to show the plot, add
+- To render and to show the plots (plot will not work while testing), add 
 ```bash
 python main.py --is_Train True --render True --plot True
 ```

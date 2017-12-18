@@ -102,8 +102,8 @@ def train():
                     if num_episode != 0 and (num_episode % config.TRAIN.decay_every == 0):
                         new_lr_decay = config.TRAIN.lr_decay ** (num_episode // config.TRAIN.decay_every)
                         lr = config.TRAIN.lr_init * new_lr_decay
-                        if lr < 1e-6:
-                            lr = 1e-6
+                        if lr < 1e-7:
+                            lr = 1e-7
                         sess.run(tf.assign(mainQN.learning_rate, lr))
                     elif num_episode == 0:
                         sess.run(tf.assign(mainQN.learning_rate, config.TRAIN.lr_init))
