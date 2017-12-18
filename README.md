@@ -23,7 +23,7 @@ cd flapybird_DQN
 ```bash
 sudo apt-get install python-pygame
 ```
--   There is no need to install gym and gym-ple. Actually, one needs to use what are uploaded.
+-   There is no need to install gym and gym-ple. Actually, one needs to use what are uploaded.<br />
     There are some changes in gym (related to wrapper.monitor) and gym-ple (related retreiving info) 
 
 ## Training and Test Details
