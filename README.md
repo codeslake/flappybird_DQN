@@ -1,15 +1,12 @@
 
 # FlappyBird with DQN
-Tensorflow implementation for training a network to play FlappyBird
+Tensorflow implementation of FlappyBird using Reinforcement Learning, DQN
 
 <img src="./assets/result.gif" width="288">
 
-This repository contains train,test codes and saved model for reproduce.
-
---------------------------
 ## Prerequisites
-- Tensorflow
-- python-pygame
+-   Tensorflow 1.0 or higher
+-   python-pygame
 
 ## Getting Started
 ### Installation
