@@ -2,7 +2,7 @@
 # FlappyBird with DQN
 Tensorflow implementation of FlappyBird using Reinforcement Learning, DQN
 
-<img src="./assets/result.mp4" width="288">
+<img src="./assets/result.gif" width="288">
 
 ## Prerequisites
 -   Tensorflow 1.0 or higher
