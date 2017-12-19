@@ -39,7 +39,7 @@ python main.py --is_Train True --render True --plot True
 ```
 
 ## Experiments
-<img src="./assets/plot.png" width="700">
+<img src="./assets/plot.png" width="100">
 
 ## License ##
 This software is being made available under the terms in the [LICENSE](LICENSE) file.
