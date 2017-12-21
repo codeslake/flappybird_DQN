@@ -279,8 +279,10 @@ def evaluate():
 
             rAll = 0.
 
+            step = 0
             while True:
                 #env.render()
+                step += 1
                 a = sess.run(mainQN.predict, feed_dict={mainQN.image: s, mainQN.scalar: info})[0]
                 s1, r, d, info1 = env.step(a)
 
@@ -296,7 +298,7 @@ def evaluate():
                 info = info1
 
                 if d:
-                    print 'reward: ' + str(rAll)
+                    print 'step: ' + str(step)
                     break;
 
     return
