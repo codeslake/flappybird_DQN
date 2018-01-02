@@ -29,11 +29,11 @@ sudo apt-get install python-pygame
 -   you need to specify directories for checkpoint and buffer saving directory in config.py
 -   To train a model,  
 ```bash
-python main.py --is_Train True
+python main.py --is_train True
 ```
 -   To test the model,
 ```bash
-python main.py --is_Train False
+python main.py --is_train False
 ```
 -   To render and to show the plots (plot will not work while testing), add 
 ```bash
