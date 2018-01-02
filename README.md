@@ -37,7 +37,7 @@ python main.py --is_train False
 ```
 -   To render and to show the plots (plot will not work while testing), add 
 ```bash
-python main.py --is_Train True --render True --plot True
+python main.py --is_train True --render True --plot True
 ```
 
 ## Experiments
